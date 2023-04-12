@@ -2,75 +2,69 @@
 
 declare(strict_types=1);
 
-namespace VehcileCalculatorIterations;
-use DateInterval;
-use DateTimeImmutable;
-
-class VehiclePriceCalculatorFinal
+class VehiclePriceCalculatorFinalFinal
 {
     public function __construct(
-        private readonly float             $rrp,
-        private readonly string            $damageCheckResult,
+        private readonly float $rrp,
+        private readonly string $damageCheckResult,
         private readonly DateTimeImmutable $lastMotDate,
         private readonly DateTimeImmutable $lastServiceDate,
-    ) {
-    }
+    ) {}
 
     public function getPrice(): float
     {
         $price = $this->rrp;
-        $totalToDeduct = 0;
-        $totalToDeduct += $price * $this->getMotMultiplier();
-        $totalToDeduct += $price * $this->getServiceMultiplier();
-        $totalToDeduct += $price * $this->getDamageCheckMultiplier();
+        $price -= $this->getMotReduction();
+        $price -= $this->getServiceReduction();
+        $price -= $this->getDamageCheckReduction();
 
-        return $price - $totalToDeduct;
+        return max($price, 0);
     }
 
-    private function getMotMultiplier(): float
+    private function getMotReduction(): float
     {
         $currentDate = new DateTimeImmutable();
 
         if ($currentDate > $this->lastMotDate->add(new DateInterval('P1Y'))) {
-            return 0.75;
+            return $this->rrp * 0.28;
         }
 
         if ($currentDate > $this->lastMotDate->add(new DateInterval('P6M'))) {
-            return 0.95;
+            return $this->rrp * 0.03;
         }
 
-        return 1;
+        return 0;
     }
 
-    private function getServiceMultiplier(): float
+    private function getServiceReduction(): float
     {
         $currentDate = new DateTimeImmutable();
 
         if ($currentDate > $this->lastServiceDate->add(new DateInterval('P3Y'))) {
-            return 0.7;
+            return $this->rrp * 0.37;
         }
 
         if ($currentDate > $this->lastServiceDate->add(new DateInterval('P1Y'))) {
-            return 0.9;
+            return $this->rrp * 0.14;
         }
 
         if ($currentDate > $this->lastServiceDate->add(new DateInterval('P6M'))) {
-            return 0.95;
+            return $this->rrp * 0.85;
         }
 
-        return 1;
+        return 0;
     }
 
-    private function getDamageCheckMultiplier(): float
+    private function getDamageCheckReduction(): float
     {
         if ($this->damageCheckResult === 'Red') {
-            return 0.1;
+            return $this->rrp * 0.93;
         }
 
         if ($this->damageCheckResult === 'Orange') {
-            return 0.5;
+            return $this->rrp * 0.5;
         }
 
-        return 1;
+        return 0;
     }
 }

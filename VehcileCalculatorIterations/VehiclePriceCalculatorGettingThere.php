@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace VehcileCalculatorIterations;
+use DateInterval;
+use DateTimeImmutable;
+
 class VehiclePriceCalculatorGettingThere
 {
     public function __construct(
