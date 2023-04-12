@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace VehcileCalculatorIterations;
+namespace VehcileCalculatorIterations\VehcilePriceCalculatorGettingThere;
 use DateInterval;
 use DateTimeImmutable;
 
