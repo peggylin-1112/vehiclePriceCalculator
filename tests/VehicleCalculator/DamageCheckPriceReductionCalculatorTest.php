@@ -6,6 +6,7 @@ namespace Tests\Hackathon\VehicleCalculator;
 
 use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
+use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use PHPUnit\Framework\TestCase;
 
 class DamageCheckPriceReductionCalculatorTest extends TestCase
@@ -16,7 +17,13 @@ class DamageCheckPriceReductionCalculatorTest extends TestCase
      */
     public function it_will_return_the_price_based_on_the_damage_check(float $rrp, DamageCheckResult $damageCheckResult, float $expectedPrice): void
     {
-        $newPrice = (new DamageCheckPriceReductionCalculator())->getPriceReduction($damageCheckResult, $rrp);
+        $vehicle = new Vehicle(
+            $rrp,
+            $damageCheckResult,
+            new \DateTimeImmutable(),
+            new \DateTimeImmutable(),
+        );
+        $newPrice = (new DamageCheckPriceReductionCalculator())->getPriceReduction($vehicle);
 
         $this->assertSame($expectedPrice, $newPrice);
     }

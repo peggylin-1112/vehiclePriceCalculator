@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Hackathon\VehicleCalculator;
 
-class MotPriceReductionCalculator
+use Hackathon\VehicleCalculator\ValueObject\Vehicle;
+
+class MotPriceReductionCalculator implements ReductionCalculator
 {
     private const EXPIRED_MOT_REDUCTION_MULTIPLIER = 0.25;
     private const MOT_EXPIRING_WITHIN_SIX_MONTHS_REDUCTION_MULTIPLIER = 0.05;
 
-    public function getPriceReduction(\DateTimeImmutable $lastMotDate, float $vehicleRrp): float
+    public function getPriceReduction(Vehicle $vehicle): float
     {
         $currentDate = new \DateTimeImmutable();
+        $lastMotDate = $vehicle->lastMotDate;
+        $vehicleRrp = $vehicle->rrp;
 
         if ($currentDate > $lastMotDate->add(new \DateInterval('P1Y'))) {
             return $vehicleRrp * self::EXPIRED_MOT_REDUCTION_MULTIPLIER;

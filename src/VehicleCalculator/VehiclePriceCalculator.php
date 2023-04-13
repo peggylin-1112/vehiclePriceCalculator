@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Hackathon\VehicleCalculator;
 
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
+use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 
 class VehiclePriceCalculator
 {
@@ -14,21 +15,16 @@ class VehiclePriceCalculator
         private readonly DamageCheckPriceReductionCalculator $damageCheckPriceReductionCalculator,
     ) {}
 
-    public function getPrice(
-        float $rrp,
-        DamageCheckResult $damageCheckResult,
-        \DateTimeImmutable $lastMotDate,
-        \DateTimeImmutable $lastServiceDate,
-    ): float
+    public function getPrice(Vehicle $vehicle): float
     {
-        if ($rrp <= 0) {
+        if ($vehicle->rrp <= 0) {
             return 0.0;
         }
 
-        $price = $rrp
-            - $this->motPriceReductionCalculator->getPriceReduction($lastMotDate, $rrp)
-            - $this->servicePriceReductionCalculator->getPriceReduction($lastServiceDate, $rrp)
-            - $this->damageCheckPriceReductionCalculator->getPriceReduction($damageCheckResult, $rrp);
+        $price = $vehicle->rrp
+            - $this->motPriceReductionCalculator->getPriceReduction($vehicle)
+            - $this->servicePriceReductionCalculator->getPriceReduction($vehicle)
+            - $this->damageCheckPriceReductionCalculator->getPriceReduction($vehicle);
 
         return $price > 0 ? $price : 0.0;
     }

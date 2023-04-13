@@ -7,6 +7,7 @@ namespace Tests\Hackathon\VehicleCalculator;
 use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
 use Hackathon\VehicleCalculator\MotPriceReductionCalculator;
+use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use PHPUnit\Framework\TestCase;
 
 class MotPriceReductionCalculatorTest extends TestCase
@@ -17,7 +18,14 @@ class MotPriceReductionCalculatorTest extends TestCase
      */
     public function it_will_return_the_price_based_on_how_long_is_left_on_the_cars_mot(float $rrp, \DateTimeImmutable $lastMotDate, float $expectedPrice): void
     {
-        $newPrice = (new MotPriceReductionCalculator())->getPriceReduction($lastMotDate, $rrp);
+        $vehicle = new Vehicle(
+            $rrp,
+            DamageCheckResult::Green,
+            $lastMotDate,
+            new \DateTimeImmutable(),
+        );
+
+        $newPrice = (new MotPriceReductionCalculator())->getPriceReduction($vehicle);
 
         $this->assertSame($expectedPrice, $newPrice);
     }

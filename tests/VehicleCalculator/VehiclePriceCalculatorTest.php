@@ -8,6 +8,7 @@ use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
 use Hackathon\VehicleCalculator\MotPriceReductionCalculator;
 use Hackathon\VehicleCalculator\ServicePriceReductionCalculator;
+use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use Hackathon\VehicleCalculator\VehiclePriceCalculator;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +31,14 @@ class VehiclePriceCalculatorTest extends TestCase
      */
     public function it_will_return_the_price_based_on_the_damage_check(float $rrp, \DateTimeImmutable $lastMotDate, \DateTimeImmutable $lastServiceDate, DamageCheckResult $damageCheckResult, float $expectedPrice): void
     {
-        $price = $this->fixture->getPrice($rrp, $damageCheckResult, $lastMotDate, $lastServiceDate);
+        $vehicle = new Vehicle(
+            $rrp,
+            $damageCheckResult,
+            $lastMotDate,
+            $lastServiceDate,
+        );
+
+        $price = $this->fixture->getPrice($vehicle);
 
         $this->assertSame($expectedPrice, $price);
     }

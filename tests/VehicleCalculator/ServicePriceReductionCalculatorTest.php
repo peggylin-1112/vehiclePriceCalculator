@@ -8,6 +8,7 @@ use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
 use Hackathon\VehicleCalculator\MotPriceReductionCalculator;
 use Hackathon\VehicleCalculator\ServicePriceReductionCalculator;
+use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use PHPUnit\Framework\TestCase;
 
 class ServicePriceReductionCalculatorTest extends TestCase
@@ -18,7 +19,14 @@ class ServicePriceReductionCalculatorTest extends TestCase
      */
     public function it_will_return_the_price_based_on_how_long_ago_was_the_cars_last_service(float $rrp, \DateTimeImmutable $lastServiceDate, float $expectedPrice): void
     {
-        $newPrice = (new ServicePriceReductionCalculator())->getPriceReduction($lastServiceDate, $rrp);
+        $vehicle = new Vehicle(
+            $rrp,
+            DamageCheckResult::Green,
+            new \DateTimeImmutable(),
+            $lastServiceDate,
+        );
+
+        $newPrice = (new ServicePriceReductionCalculator())->getPriceReduction($vehicle);
 
         $this->assertSame($expectedPrice, $newPrice);
     }
