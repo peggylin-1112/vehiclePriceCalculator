@@ -6,7 +6,7 @@ namespace Hackathon\VehicleCalculator;
 
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 
-class MotPriceReductionCalculator implements ReductionCalculator
+class MotPricePriceReductionCalculator implements PriceReductionCalculator
 {
     private const EXPIRED_MOT_REDUCTION_MULTIPLIER = 0.25;
     private const MOT_EXPIRING_WITHIN_SIX_MONTHS_REDUCTION_MULTIPLIER = 0.05;

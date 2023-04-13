@@ -7,7 +7,7 @@ namespace Hackathon\VehicleCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 
-class DamageCheckPriceReductionCalculator implements ReductionCalculator
+class DamageCheckPricePriceReductionCalculator implements PriceReductionCalculator
 {
     private const RED_REDUCTION_MULTIPLIER = 0.9;
     private const ORANGE_REDUCTION_MULTIPLIER = 0.5;

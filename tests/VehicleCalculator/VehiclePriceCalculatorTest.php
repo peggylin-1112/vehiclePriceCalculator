@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Hackathon\VehicleCalculator;
 
-use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
+use Hackathon\VehicleCalculator\DamageCheckPricePriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
-use Hackathon\VehicleCalculator\MotPriceReductionCalculator;
-use Hackathon\VehicleCalculator\ServicePriceReductionCalculator;
+use Hackathon\VehicleCalculator\MotPricePriceReductionCalculator;
+use Hackathon\VehicleCalculator\ServicePricePriceReductionCalculator;
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use Hackathon\VehicleCalculator\VehiclePriceCalculator;
 use PHPUnit\Framework\TestCase;
@@ -19,9 +19,9 @@ class VehiclePriceCalculatorTest extends TestCase
     protected function setup(): void
     {
         $this->fixture = new VehiclePriceCalculator(
-            new MotPriceReductionCalculator(),
-            new ServicePriceReductionCalculator(),
-            new DamageCheckPriceReductionCalculator(),
+            new MotPricePriceReductionCalculator(),
+            new ServicePricePriceReductionCalculator(),
+            new DamageCheckPricePriceReductionCalculator(),
         );
     }
 

@@ -6,7 +6,7 @@ namespace Hackathon\VehicleCalculator;
 
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 
-interface ReductionCalculator
+interface PriceReductionCalculator
 {
     public function getPriceReduction(Vehicle $vehicle): float;
 }

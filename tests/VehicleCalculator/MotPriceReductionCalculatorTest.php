@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Hackathon\VehicleCalculator;
 
-use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
+use Hackathon\VehicleCalculator\DamageCheckPricePriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
-use Hackathon\VehicleCalculator\MotPriceReductionCalculator;
+use Hackathon\VehicleCalculator\MotPricePriceReductionCalculator;
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +25,7 @@ class MotPriceReductionCalculatorTest extends TestCase
             new \DateTimeImmutable(),
         );
 
-        $newPrice = (new MotPriceReductionCalculator())->getPriceReduction($vehicle);
+        $newPrice = (new MotPricePriceReductionCalculator())->getPriceReduction($vehicle);
 
         $this->assertSame($expectedPrice, $newPrice);
     }

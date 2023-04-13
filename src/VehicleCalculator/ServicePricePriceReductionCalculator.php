@@ -6,7 +6,7 @@ namespace Hackathon\VehicleCalculator;
 
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 
-class ServicePriceReductionCalculator implements ReductionCalculator
+class ServicePricePriceReductionCalculator implements PriceReductionCalculator
 {
     private const VEHICLE_SERVICED_OVER_THREE_YEARS_AGO_REDUCTION_MULTIPLIER = 0.3;
     private const VEHICLE_SERVICED_BETWEEN_ONE_AND_THREE_YEARS_AGO_REDUCTION_MULTIPLIER = 0.1;

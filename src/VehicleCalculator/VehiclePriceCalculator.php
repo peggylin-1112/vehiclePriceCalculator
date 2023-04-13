@@ -10,9 +10,9 @@ use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 class VehiclePriceCalculator
 {
     public function __construct(
-        private readonly MotPriceReductionCalculator $motPriceReductionCalculator,
-        private readonly ServicePriceReductionCalculator $servicePriceReductionCalculator,
-        private readonly DamageCheckPriceReductionCalculator $damageCheckPriceReductionCalculator,
+        private readonly MotPricePriceReductionCalculator         $motPriceReductionCalculator,
+        private readonly ServicePricePriceReductionCalculator     $servicePriceReductionCalculator,
+        private readonly DamageCheckPricePriceReductionCalculator $damageCheckPriceReductionCalculator,
     ) {}
 
     public function getPrice(Vehicle $vehicle): float

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Hackathon\VehicleCalculator;
 
-use Hackathon\VehicleCalculator\DamageCheckPriceReductionCalculator;
+use Hackathon\VehicleCalculator\DamageCheckPricePriceReductionCalculator;
 use Hackathon\VehicleCalculator\Enum\DamageCheckResult;
-use Hackathon\VehicleCalculator\MotPriceReductionCalculator;
-use Hackathon\VehicleCalculator\ServicePriceReductionCalculator;
+use Hackathon\VehicleCalculator\MotPricePriceReductionCalculator;
+use Hackathon\VehicleCalculator\ServicePricePriceReductionCalculator;
 use Hackathon\VehicleCalculator\ValueObject\Vehicle;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +26,7 @@ class ServicePriceReductionCalculatorTest extends TestCase
             $lastServiceDate,
         );
 
-        $newPrice = (new ServicePriceReductionCalculator())->getPriceReduction($vehicle);
+        $newPrice = (new ServicePricePriceReductionCalculator())->getPriceReduction($vehicle);
 
         $this->assertSame($expectedPrice, $newPrice);
     }
